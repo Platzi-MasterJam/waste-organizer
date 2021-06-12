@@ -135,6 +135,15 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        'white-own': '#E5E5E5',
+        'gray-own': '#91A7A4',
+        'gray-light': '#C4C4C4',
+        'gray-rgb': 'rgb(145, 167, 164, 15%)',
+        'green-own': '#72CB10',
+        'green-dark': '#072523',
+        'green-rgb': 'rgb(114, 203, 16, 45%)',
+      },
       fontSize: fontSizes,
       lineHeight: fontSizes,
       spacing: {
@@ -281,7 +290,10 @@ module.exports = {
       minWidth: sizes,
       borderRadius: {
         none: 0,
+        lg: '1.5rem',
         xl: '2rem',
+        '1xl': '2.5rem',
+        '2xl': '3rem',
       },
     },
   },
