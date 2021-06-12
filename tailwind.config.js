@@ -131,7 +131,7 @@ const fontSizes = {
 }
 
 module.exports = {
-  purge: [],
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -279,10 +279,16 @@ module.exports = {
       width: sizes,
       maxWidth: sizes,
       minWidth: sizes,
+      borderRadius: {
+        none: 0,
+        xl: '2rem',
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }
