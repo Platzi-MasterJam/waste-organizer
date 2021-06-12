@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CardTrash from 'components/CardTrash'
 
 export default function Juego() {
+  const [counter, setCounter] = useState(0)
+  const [value, setValue] = useState()
   const [incorrect, setIncorrect] = useState(false)
   const [correct, setCorrect] = useState(false)
+
+  useEffect(() => {}, [])
 
   return (
     <section className="w-6/12 mx-auto">
@@ -15,7 +19,15 @@ export default function Juego() {
       </div>
       <div className="flex justify-between pt-32">
         <div>
-          <CardTrash bgColor="bg-green-own" name="orgánico" />
+          <CardTrash
+            value={value}
+            bgColor="bg-green-own"
+            name="organico"
+            id="organico"
+            setIncorrect={setIncorrect}
+            setCorrect={setCorrect}
+            setCounter={setCounter}
+          />
         </div>
         <div className="flex items-center justify-center">
           <img
@@ -36,20 +48,37 @@ export default function Juego() {
           />
         </div>
         <div>
-          <CardTrash bgColor="bg-gray-own" name="inorgánico" />
+          <CardTrash
+            setValue={value}
+            bgColor="bg-gray-own"
+            name="inorganico"
+            id="inorganico"
+            setIncorrect={setIncorrect}
+            setCorrect={setCorrect}
+            setCounter={setCounter}
+          />
         </div>
       </div>
-      <div
-        className="mx-auto mt-8"
+
+      <img
+        id="organico"
+        onDragStart={(e) => {
+          setValue(e.target.id)
+        }}
+        onDragEnd={() => {
+          if (correct) {
+            setCounter(counter + 1)
+          }
+          console.log(counter)
+        }}
+        className="bg-transparent block mx-auto mt-8"
+        draggable={true}
+        src="https://dl.dropboxusercontent.com/s/n6b3hc9eoew0a4h/huevo.png"
+        alt=""
         style={{
           width: '150px',
         }}
-      >
-        <img
-          src="https://dl.dropboxusercontent.com/s/n6b3hc9eoew0a4h/incorrecto.png"
-          alt=""
-        />
-      </div>
+      />
     </section>
   )
 }
