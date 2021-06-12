@@ -17,7 +17,7 @@ export default function Example() {
     event.preventDefault()
     if (user) {
       window.localStorage.setItem('user', user);
-      router.push('/juego')
+      router.push('/game')
     }
   }
 
