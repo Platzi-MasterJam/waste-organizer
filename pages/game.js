@@ -4,9 +4,10 @@ import axios from 'axios'
 
 export default function Juego() {
   const [counter, setCounter] = useState(0)
-  const [value, setValue] = useState()
-  const [incorrect, setIncorrect] = useState(false)
-  const [correct, setCorrect] = useState(false)
+  // const [value, setValue] = useState()
+  // const [incorrect, setIncorrect] = useState(false)
+  // const [correct, setCorrect] = useState(false)
+  const [status, setStatus] = useState('idle')
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -32,28 +33,30 @@ export default function Juego() {
       <div className="flex justify-between pt-32">
         <div>
           <CardTrash
-            value={value}
+            value={products && products.length  && products[0].type}
             bgColor="bg-green-own"
-            name="organico"
-            id="organico"
-            setIncorrect={setIncorrect}
-            setCorrect={setCorrect}
+            name="organic"
+            id="organic"
+            setStatus={setStatus}
+            // setIncorrect={setIncorrect}
+            // setCorrect={setCorrect}
             setCounter={setCounter}
           />
         </div>
         <div className="flex items-center justify-center">
-          {correct ? (
+          {status === 'correct' && (
             <img
-              className={`${correct ? 'block' : 'hidden'}`}
+              // className={`${correct ? 'block' : 'hidden'}`}
               src="https://dl.dropboxusercontent.com/s/5c3uzuc955igtdn/correcto.png"
               alt="correcto"
               style={{
                 width: '125px',
               }}
             />
-          ) : (
+          )}
+          {status === 'incorrect' && (
             <img
-              className={`${incorrect ? 'block' : 'hidden'}`}
+              // className={`${incorrect ? 'block' : 'hidden'}`}
               src="https://dl.dropboxusercontent.com/s/kgegl1ni2hpupk7/incorrecto.png"
               alt="incorrecto"
               style={{
@@ -64,12 +67,13 @@ export default function Juego() {
         </div>
         <div>
           <CardTrash
-            setValue={value}
+            setValue={products && products.length  && products[0].type}
             bgColor="bg-gray-own"
-            name="inorganico"
-            id="inorganico"
-            setIncorrect={setIncorrect}
-            setCorrect={setCorrect}
+            name="inorganic"
+            id="inorganic"
+            setStatus={setStatus}
+            // setIncorrect={setIncorrect}
+            // setCorrect={setCorrect}
             setCounter={setCounter}
           />
         </div>
@@ -77,14 +81,13 @@ export default function Juego() {
 
       {products && products.length && (
         <img
-          id="organico"
-          onDragStart={() => {
+          /* onDragStart={() => {
             setValue(products[0].type)
-          }}
+          }} */
           onDragEnd={() => {
-            if (correct) {
+            setProducts(products.filter((p) => p.key !== products[0].key))
+            if (status === 'correct') {
               setCounter(counter + 1)
-              setProducts(products.filter(p => p.key !== products[0].key))
             }
           }}
           className="bg-transparent block mx-auto mt-8"

@@ -1,11 +1,12 @@
 const CardTrash = ({
-  setCorrect,
-  setIncorrect,
+  // typeValue,
+  // setCorrect,
+  // setIncorrect,
+  setStatus,
   value,
   name = 'nombre',
   bgColor,
   id,
-  typeValue,
 }) => {
   return (
     <div
@@ -30,12 +31,15 @@ const CardTrash = ({
           }}
           onDrop={(e) => {
             e.preventDefault()
-            const isCorrect = value === typeValue
-            if (isCorrect) {
-              setCorrect(isCorrect)
-            } else {
-              setIncorrect(true)
-            }
+            const status = value === id ? 'correct' : 'incorrect';
+            console.log("🚀 ~ file: CardTrash.js ~ line 35 ~ id", id)
+            console.log("🚀 ~ file: CardTrash.js ~ line 35 ~ value", value)
+            setStatus(status);
+            // if (isCorrect) {
+            //   setCorrect(isCorrect)
+            // } else {
+            //   setIncorrect(true)
+            // }
             e.target.style = 'transform: scale(1)'
           }}
           src="https://dl.dropboxusercontent.com/s/7bb6ghvn3svp7tu/bote-basura.png"
