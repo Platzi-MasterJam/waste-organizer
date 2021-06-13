@@ -1,27 +1,5 @@
 import { useState, useEffect } from 'react'
-
-const mock = [
-  {
-    user: 'Gerardo',
-    score: 21,
-    created_at: '2020-06-12',
-  },
-  {
-    user: 'Angel',
-    score: 22,
-    created_at: '2020-06-11',
-  },
-  {
-    user: 'Osvaldo',
-    score: 23,
-    created_at: '2020-06-10',
-  },
-  {
-    user: 'Wilson',
-    score: 24,
-    created_at: '2020-06-09',
-  },
-]
+import axios from 'axios'
 
 function Container({ children }) {
   return (
@@ -35,8 +13,13 @@ export default function Table() {
   const [people, setPeople] = useState([])
 
   useEffect(() => {
-    setPeople(mock)
+    getResults()
   }, [])
+
+  async function getResults() {
+    const result = await axios.get('https://69xlj1.deta.dev/results')
+    setPeople(result.data)
+  }
 
   return (
     <Container>
@@ -70,7 +53,7 @@ export default function Table() {
                   </tr>
                 </thead>
                 <tbody>
-                  {people.map((person, personIdx) => (
+                  {people && people.length && people.map((person, personIdx) => (
                     <tr
                       key={`${person.name}-${person.created_at}`}
                       className={
@@ -78,13 +61,13 @@ export default function Table() {
                       }
                     >
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {person.user}
+                        {person.username}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {person.score}
+                        {person.right_answers}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {person.created_at}
+                        {person.date}
                       </td>
                     </tr>
                   ))}

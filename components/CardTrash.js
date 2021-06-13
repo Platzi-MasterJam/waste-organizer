@@ -5,6 +5,7 @@ const CardTrash = ({
   name = 'nombre',
   bgColor,
   id,
+  typeValue,
 }) => {
   return (
     <div
@@ -29,7 +30,7 @@ const CardTrash = ({
           }}
           onDrop={(e) => {
             e.preventDefault()
-            const isCorrect = value === e.target.id
+            const isCorrect = value === typeValue
             if (isCorrect) {
               setCorrect(isCorrect)
             } else {
